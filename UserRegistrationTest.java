@@ -8,81 +8,81 @@ public class UserRegistrationTest {
 
     @Test
     public void testFirstNameHappy() throws InvalidUserDetailsException {
-        assertTrue(registration.validateFirstName("Aayush"));
+        assertTrue(registration.validateFirstName.validate("Aayush"));
     }
 
     @Test
     public void testFirstNameSad() {
-        assertThrows(InvalidUserDetailsException.class, () -> registration.validateFirstName("aa"));
+        assertThrows(InvalidUserDetailsException.class, () -> registration.validateFirstName.validate("aa"));
     }
 
     @Test
     public void testLastNameHappy() throws InvalidUserDetailsException {
-        assertTrue(registration.validateLastName("Mani"));
+        assertTrue(registration.validateLastName.validate("Mani"));
     }
 
     @Test
     public void testLastNameSad() {
-        assertThrows(InvalidUserDetailsException.class, () -> registration.validateLastName("ma"));
+        assertThrows(InvalidUserDetailsException.class, () -> registration.validateLastName.validate("ma"));
     }
 
     @Test
     public void testEmailHappy() throws InvalidUserDetailsException {
-        assertTrue(registration.validateEmail("abc.xyz@bl.co.in"));
+        assertTrue(registration.validateEmail.validate("abc.xyz@bl.co.in"));
     }
 
     @Test
     public void testEmailSad() {
-        assertThrows(InvalidUserDetailsException.class, () -> registration.validateEmail("abc@.com.my"));
+        assertThrows(InvalidUserDetailsException.class, () -> registration.validateEmail.validate("abc@.com.my"));
     }
 
     @Test
     public void testMobileHappy() throws InvalidUserDetailsException {
-        assertTrue(registration.validateMobile("91 9919819801"));
+        assertTrue(registration.validateMobile.validate("91 9919819801"));
     }
 
     @Test
     public void testMobileSad() {
-        assertThrows(InvalidUserDetailsException.class, () -> registration.validateMobile("919919819801"));
+        assertThrows(InvalidUserDetailsException.class, () -> registration.validateMobile.validate("919919819801"));
     }
 
     @Test
     public void testPasswordRule1Happy() throws InvalidUserDetailsException {
-        assertTrue(registration.validatePasswordRule1("password123"));
+        assertTrue(registration.validatePasswordRule1.validate("password123"));
     }
 
     @Test
     public void testPasswordRule1Sad() {
-        assertThrows(InvalidUserDetailsException.class, () -> registration.validatePasswordRule1("pass"));
+        assertThrows(InvalidUserDetailsException.class, () -> registration.validatePasswordRule1.validate("pass"));
     }
 
     @Test
     public void testPasswordRule2Happy() throws InvalidUserDetailsException {
-        assertTrue(registration.validatePasswordRule2("Password123"));
+        assertTrue(registration.validatePasswordRule2.validate("Password123"));
     }
 
     @Test
     public void testPasswordRule2Sad() {
-        assertThrows(InvalidUserDetailsException.class, () -> registration.validatePasswordRule2("password123"));
+        assertThrows(InvalidUserDetailsException.class, () -> registration.validatePasswordRule2.validate("password123"));
     }
 
     @Test
     public void testPasswordRule3Happy() throws InvalidUserDetailsException {
-        assertTrue(registration.validatePasswordRule3("Password123"));
+        assertTrue(registration.validatePasswordRule3.validate("Password123"));
     }
 
     @Test
     public void testPasswordRule3Sad() {
-        assertThrows(InvalidUserDetailsException.class, () -> registration.validatePasswordRule3("Password"));
+        assertThrows(InvalidUserDetailsException.class, () -> registration.validatePasswordRule3.validate("Password"));
     }
 
     @Test
     public void testPasswordRule4Happy() throws InvalidUserDetailsException {
-        assertTrue(registration.validatePasswordRule4("Password@123"));
+        assertTrue(registration.validatePasswordRule4.validate("Password@123"));
     }
 
     @Test
     public void testPasswordRule4Sad() {
-        assertThrows(InvalidUserDetailsException.class, () -> registration.validatePasswordRule4("Password123"));
+        assertThrows(InvalidUserDetailsException.class, () -> registration.validatePasswordRule4.validate("Password123"));
     }
 }

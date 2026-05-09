@@ -1,28 +1,25 @@
-@FunctionalInterface
-interface Validator {
-    boolean validate(String input) throws InvalidUserDetailsException;
-}
+// Using IUserValidation from external file
 
 public class Main {
     public static void main(String[] args) {
         UserRegistration registration = new UserRegistration();
         
-        test(registration::validateFirstName, "Aayush");
-        test(registration::validateFirstName, "aa");
-        test(registration::validateLastName, "Mani");
-        test(registration::validateLastName, "ma");
-        test(registration::validateEmail, "abc.xyz@bl.co.in");
-        test(registration::validateEmail, "abc@bl.co");
-        test(registration::validateMobile, "91 9919819801");
-        test(registration::validateMobile, "919919819801");
-        test(registration::validatePasswordRule1, "password123");
-        test(registration::validatePasswordRule1, "pass");
-        test(registration::validatePasswordRule2, "Password123");
-        test(registration::validatePasswordRule2, "password123");
-        test(registration::validatePasswordRule3, "Password123");
-        test(registration::validatePasswordRule3, "Password");
-        test(registration::validatePasswordRule4, "Password@123");
-        test(registration::validatePasswordRule4, "Password123");
+        test(registration.validateFirstName, "Aayush");
+        test(registration.validateFirstName, "aa");
+        test(registration.validateLastName, "Mani");
+        test(registration.validateLastName, "ma");
+        test(registration.validateEmail, "abc.xyz@bl.co.in");
+        test(registration.validateEmail, "abc@bl.co");
+        test(registration.validateMobile, "91 9919819801");
+        test(registration.validateMobile, "919919819801");
+        test(registration.validatePasswordRule1, "password123");
+        test(registration.validatePasswordRule1, "pass");
+        test(registration.validatePasswordRule2, "Password123");
+        test(registration.validatePasswordRule2, "password123");
+        test(registration.validatePasswordRule3, "Password123");
+        test(registration.validatePasswordRule3, "Password");
+        test(registration.validatePasswordRule4, "Password@123");
+        test(registration.validatePasswordRule4, "Password123");
 
         String[] validEmails = {
             "abc@yahoo.com", "abc-100@yahoo.com", "abc.100@yahoo.com", 
@@ -31,7 +28,7 @@ public class Main {
         };
         System.out.println("\nValid Emails:");
         for (String sample : validEmails) {
-            testWithInput(registration::validateEmail, sample);
+            testWithInput(registration.validateEmail, sample);
         }
 
         String[] invalidEmails = {
@@ -42,11 +39,11 @@ public class Main {
         };
         System.out.println("\nInvalid Emails:");
         for (String sample : invalidEmails) {
-            testWithInput(registration::validateEmail, sample);
+            testWithInput(registration.validateEmail, sample);
         }
     }
 
-    private static void test(Validator validator, String input) {
+    private static void test(IUserValidation validator, String input) {
         try {
             System.out.println(validator.validate(input));
         } catch (InvalidUserDetailsException e) {
@@ -54,7 +51,7 @@ public class Main {
         }
     }
 
-    private static void testWithInput(Validator validator, String input) {
+    private static void testWithInput(IUserValidation validator, String input) {
         try {
             System.out.println(input + " : " + validator.validate(input));
         } catch (InvalidUserDetailsException e) {

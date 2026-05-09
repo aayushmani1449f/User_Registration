@@ -51,7 +51,7 @@ public class EmailParameterizedTest {
     @Test
     public void testEmailValidation() {
         try {
-            boolean result = registration.validateEmail(this.email);
+            boolean result = registration.validateEmail.validate(this.email);
             assertEquals(expectedResult, result);
         } catch (InvalidUserDetailsException e) {
             assertEquals(expectedResult, false);
