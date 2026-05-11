@@ -28,8 +28,14 @@ public class AddressBook {
         String email = scanner.nextLine();
 
         Contact contact = new Contact(firstName, lastName, address, city, state, zip, phoneNumber, email);
-        contacts.add(contact);
-        System.out.println("Contact added successfully.");
+        
+        boolean isDuplicate = contacts.stream().anyMatch(c -> c.equals(contact));
+        if (isDuplicate) {
+            System.out.println("Duplicate entry found! Contact not added.");
+        } else {
+            contacts.add(contact);
+            System.out.println("Contact added successfully.");
+        }
     }
 
     public void editContact(Scanner scanner) {
