@@ -22,6 +22,14 @@ public class AddressBookMain {
         return addressBooks.get(name);
     }
 
+    public void searchPerson(String location, boolean isCity) {
+        System.out.println("Search results in " + location + ":");
+        addressBooks.values().stream()
+                .flatMap(addressBook -> addressBook.getContacts().stream())
+                .filter(contact -> isCity ? contact.getCity().equalsIgnoreCase(location) : contact.getState().equalsIgnoreCase(location))
+                .forEach(System.out::println);
+    }
+
     public static void main(String[] args) {
         System.out.println("Welcome to Address Book Program");
         Scanner scanner = new Scanner(System.in);
@@ -32,7 +40,8 @@ public class AddressBookMain {
             System.out.println("\n--- Main Menu ---");
             System.out.println("1. Add New Address Book");
             System.out.println("2. Select Address Book");
-            System.out.println("3. Exit");
+            System.out.println("3. Search Person by City or State");
+            System.out.println("4. Exit");
             System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
             scanner.nextLine();
@@ -54,6 +63,22 @@ public class AddressBookMain {
                     }
                     break;
                 case 3:
+                    System.out.print("Search by (1) City or (2) State? Enter choice: ");
+                    int searchChoice = scanner.nextInt();
+                    scanner.nextLine();
+                    if (searchChoice == 1) {
+                        System.out.print("Enter City: ");
+                        String city = scanner.nextLine();
+                        system.searchPerson(city, true);
+                    } else if (searchChoice == 2) {
+                        System.out.print("Enter State: ");
+                        String state = scanner.nextLine();
+                        system.searchPerson(state, false);
+                    } else {
+                        System.out.println("Invalid choice.");
+                    }
+                    break;
+                case 4:
                     running = false;
                     break;
                 default:
