@@ -47,6 +47,14 @@ public class AddressBookMain {
         }
     }
 
+    public void countPersonsByLocation(String location, boolean isCity) {
+        long count = addressBooks.values().stream()
+                .flatMap(addressBook -> addressBook.getContacts().stream())
+                .filter(contact -> isCity ? contact.getCity().equalsIgnoreCase(location) : contact.getState().equalsIgnoreCase(location))
+                .count();
+        System.out.println("Total persons in " + location + ": " + count);
+    }
+
     public static void main(String[] args) {
         System.out.println("Welcome to Address Book Program");
         Scanner scanner = new Scanner(System.in);
@@ -59,7 +67,8 @@ public class AddressBookMain {
             System.out.println("2. Select Address Book");
             System.out.println("3. Search Person by City or State");
             System.out.println("4. View Persons by City or State");
-            System.out.println("5. Exit");
+            System.out.println("5. Count Persons by City or State");
+            System.out.println("6. Exit");
             System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
             scanner.nextLine();
@@ -109,6 +118,22 @@ public class AddressBookMain {
                     }
                     break;
                 case 5:
+                    System.out.print("Count by (1) City or (2) State? Enter choice: ");
+                    int countChoice = scanner.nextInt();
+                    scanner.nextLine();
+                    if (countChoice == 1) {
+                        System.out.print("Enter City: ");
+                        String city = scanner.nextLine();
+                        system.countPersonsByLocation(city, true);
+                    } else if (countChoice == 2) {
+                        System.out.print("Enter State: ");
+                        String state = scanner.nextLine();
+                        system.countPersonsByLocation(state, false);
+                    } else {
+                        System.out.println("Invalid choice.");
+                    }
+                    break;
+                case 6:
                     running = false;
                     break;
                 default:
