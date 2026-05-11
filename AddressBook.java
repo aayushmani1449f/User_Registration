@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -7,6 +8,10 @@ public class AddressBook {
 
     public AddressBook() {
         this.contacts = new ArrayList<>();
+    }
+
+    public List<Contact> getContacts() {
+        return contacts;
     }
 
     public void addContact(Scanner scanner) {
@@ -85,5 +90,12 @@ public class AddressBook {
         for (Contact contact : contacts) {
             System.out.println(contact);
         }
+    }
+
+    public void sortContactsByName() {
+        System.out.println("Contacts sorted by Name:");
+        contacts.stream()
+                .sorted(Comparator.comparing(Contact::getFirstName).thenComparing(Contact::getLastName))
+                .forEach(System.out::println);
     }
 }
