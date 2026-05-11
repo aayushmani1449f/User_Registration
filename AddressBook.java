@@ -98,4 +98,25 @@ public class AddressBook {
                 .sorted(Comparator.comparing(Contact::getFirstName).thenComparing(Contact::getLastName))
                 .forEach(System.out::println);
     }
+
+    public void sortContactsByCity() {
+        System.out.println("Contacts sorted by City:");
+        contacts.stream()
+                .sorted(Comparator.comparing(Contact::getCity))
+                .forEach(System.out::println);
+    }
+
+    public void sortContactsByState() {
+        System.out.println("Contacts sorted by State:");
+        contacts.stream()
+                .sorted(Comparator.comparing(Contact::getState))
+                .forEach(System.out::println);
+    }
+
+    public void sortContactsByZip() {
+        System.out.println("Contacts sorted by Zip:");
+        contacts.stream()
+                .sorted(Comparator.comparing(Contact::getZip))
+                .forEach(System.out::println);
+    }
 }

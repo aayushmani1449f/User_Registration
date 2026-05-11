@@ -147,7 +147,7 @@ public class AddressBookMain {
         boolean running = true;
         while (running) {
             System.out.println("\n--- Address Book Menu ---");
-            System.out.println("1. Add Contact\n2. Edit Contact\n3. Delete Contact\n4. Display Contacts\n5. Sort Contacts by Name\n6. Go Back to Main Menu");
+            System.out.println("1. Add Contact\n2. Edit Contact\n3. Delete Contact\n4. Display Contacts\n5. Sort Contacts by Name\n6. Sort Contacts by Location (City/State/Zip)\n7. Go Back to Main Menu");
             System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
             scanner.nextLine(); 
@@ -169,6 +169,15 @@ public class AddressBookMain {
                     addressBook.sortContactsByName();
                     break;
                 case 6:
+                    System.out.print("Sort by (1) City, (2) State, or (3) Zip? Enter choice: ");
+                    int sortChoice = scanner.nextInt();
+                    scanner.nextLine();
+                    if (sortChoice == 1) addressBook.sortContactsByCity();
+                    else if (sortChoice == 2) addressBook.sortContactsByState();
+                    else if (sortChoice == 3) addressBook.sortContactsByZip();
+                    else System.out.println("Invalid choice.");
+                    break;
+                case 7:
                     running = false;
                     break;
                 default:
