@@ -1,6 +1,8 @@
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class AddressBookMain {
     private Map<String, AddressBook> addressBooks;
@@ -30,6 +32,21 @@ public class AddressBookMain {
                 .forEach(System.out::println);
     }
 
+    public void viewPersonsByLocation(boolean isCity) {
+        Map<String, List<Contact>> locationDictionary;
+        if (isCity) {
+            locationDictionary = addressBooks.values().stream()
+                    .flatMap(addressBook -> addressBook.getContacts().stream())
+                    .collect(Collectors.groupingBy(Contact::getCity));
+            System.out.println("Persons viewed by City: " + locationDictionary);
+        } else {
+            locationDictionary = addressBooks.values().stream()
+                    .flatMap(addressBook -> addressBook.getContacts().stream())
+                    .collect(Collectors.groupingBy(Contact::getState));
+            System.out.println("Persons viewed by State: " + locationDictionary);
+        }
+    }
+
     public static void main(String[] args) {
         System.out.println("Welcome to Address Book Program");
         Scanner scanner = new Scanner(System.in);
@@ -41,7 +58,8 @@ public class AddressBookMain {
             System.out.println("1. Add New Address Book");
             System.out.println("2. Select Address Book");
             System.out.println("3. Search Person by City or State");
-            System.out.println("4. Exit");
+            System.out.println("4. View Persons by City or State");
+            System.out.println("5. Exit");
             System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
             scanner.nextLine();
@@ -79,6 +97,18 @@ public class AddressBookMain {
                     }
                     break;
                 case 4:
+                    System.out.print("View by (1) City or (2) State? Enter choice: ");
+                    int viewChoice = scanner.nextInt();
+                    scanner.nextLine();
+                    if (viewChoice == 1) {
+                        system.viewPersonsByLocation(true);
+                    } else if (viewChoice == 2) {
+                        system.viewPersonsByLocation(false);
+                    } else {
+                        System.out.println("Invalid choice.");
+                    }
+                    break;
+                case 5:
                     running = false;
                     break;
                 default:
