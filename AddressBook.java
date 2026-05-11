@@ -46,40 +46,38 @@ public class AddressBook {
     public void editContact(Scanner scanner) {
         System.out.print("Enter First Name of contact to edit: ");
         String name = scanner.nextLine();
-        for (Contact contact : contacts) {
-            if (contact.getFirstName().equalsIgnoreCase(name)) {
-                System.out.print("Enter new Last Name: ");
-                contact.setLastName(scanner.nextLine());
-                System.out.print("Enter new Address: ");
-                contact.setAddress(scanner.nextLine());
-                System.out.print("Enter new City: ");
-                contact.setCity(scanner.nextLine());
-                System.out.print("Enter new State: ");
-                contact.setState(scanner.nextLine());
-                System.out.print("Enter new Zip: ");
-                contact.setZip(scanner.nextLine());
-                System.out.print("Enter new Phone Number: ");
-                contact.setPhoneNumber(scanner.nextLine());
-                System.out.print("Enter new Email: ");
-                contact.setEmail(scanner.nextLine());
-                System.out.println("Contact updated successfully.");
-                return;
-            }
-        }
-        System.out.println("Contact not found.");
+        
+        contacts.stream()
+                .filter(c -> c.getFirstName().equalsIgnoreCase(name))
+                .findFirst()
+                .ifPresentOrElse(contact -> {
+                    System.out.print("Enter new Last Name: ");
+                    contact.setLastName(scanner.nextLine());
+                    System.out.print("Enter new Address: ");
+                    contact.setAddress(scanner.nextLine());
+                    System.out.print("Enter new City: ");
+                    contact.setCity(scanner.nextLine());
+                    System.out.print("Enter new State: ");
+                    contact.setState(scanner.nextLine());
+                    System.out.print("Enter new Zip: ");
+                    contact.setZip(scanner.nextLine());
+                    System.out.print("Enter new Phone Number: ");
+                    contact.setPhoneNumber(scanner.nextLine());
+                    System.out.print("Enter new Email: ");
+                    contact.setEmail(scanner.nextLine());
+                    System.out.println("Contact updated successfully.");
+                }, () -> System.out.println("Contact not found."));
     }
 
     public void deleteContact(Scanner scanner) {
         System.out.print("Enter First Name of contact to delete: ");
         String name = scanner.nextLine();
-        for (int i = 0; i < contacts.size(); i++) {
-            if (contacts.get(i).getFirstName().equalsIgnoreCase(name)) {
-                contacts.remove(i);
-                System.out.println("Contact deleted successfully.");
-                return;
-            }
+        boolean removed = contacts.removeIf(c -> c.getFirstName().equalsIgnoreCase(name));
+        if (removed) {
+            System.out.println("Contact deleted successfully.");
+        } else {
+            System.out.println("Contact not found.");
         }
-        System.out.println("Contact not found.");
     }
 
     public void displayContacts() {
