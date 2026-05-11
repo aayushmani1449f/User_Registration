@@ -8,7 +8,7 @@ public class AddressBookMain {
 
         boolean running = true;
         while (running) {
-            System.out.println("\n1. Add Contact\n2. Edit Contact\n3. Delete Contact\n4. Exit");
+            System.out.println("\n1. Add Contact\n2. Edit Contact\n3. Delete Contact\n4. Display Contacts\n5. Exit");
             System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
             scanner.nextLine(); // consume newline
@@ -24,6 +24,9 @@ public class AddressBookMain {
                     addressBook.deleteContact(scanner);
                     break;
                 case 4:
+                    addressBook.displayContacts();
+                    break;
+                case 5:
                     running = false;
                     break;
                 default:

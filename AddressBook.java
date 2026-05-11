@@ -70,4 +70,14 @@ public class AddressBook {
         }
         System.out.println("Contact not found.");
     }
+
+    public void displayContacts() {
+        if (contacts.isEmpty()) {
+            System.out.println("No contacts in this address book.");
+            return;
+        }
+        for (Contact contact : contacts) {
+            System.out.println(contact);
+        }
+    }
 }
