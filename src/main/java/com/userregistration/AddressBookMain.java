@@ -148,7 +148,7 @@ public class AddressBookMain {
         boolean running = true;
         while (running) {
             System.out.println("\n--- Address Book Menu ---");
-            System.out.println("1. Add Contact\n2. Edit Contact\n3. Delete Contact\n4. Display Contacts\n5. Sort Contacts by Name\n6. Sort Contacts by Location (City/State/Zip)\n7. Write to Text File\n8. Read from Text File\n9. Write to CSV File\n10. Read from CSV File\n11. Go Back to Main Menu");
+            System.out.println("1. Add Contact\n2. Edit Contact\n3. Delete Contact\n4. Display Contacts\n5. Sort Contacts by Name\n6. Sort Contacts by Location (City/State/Zip)\n7. Write to Text File\n8. Read from Text File\n9. Write to CSV File\n10. Read from CSV File\n11. Write to JSON File\n12. Read from JSON File\n13. Go Back to Main Menu");
             System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
             scanner.nextLine(); 
@@ -191,6 +191,12 @@ public class AddressBookMain {
                     new AddressBookCSVService().readData();
                     break;
                 case 11:
+                    new AddressBookJSONService().writeData(addressBook.getContacts());
+                    break;
+                case 12:
+                    new AddressBookJSONService().readData();
+                    break;
+                case 13:
                     running = false;
                     break;
                 default:
