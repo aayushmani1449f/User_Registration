@@ -148,7 +148,7 @@ public class AddressBookMain {
         boolean running = true;
         while (running) {
             System.out.println("\n--- Address Book Menu ---");
-            System.out.println("1. Add Contact\n2. Edit Contact\n3. Delete Contact\n4. Display Contacts\n5. Sort Contacts by Name\n6. Sort Contacts by Location (City/State/Zip)\n7. Go Back to Main Menu");
+            System.out.println("1. Add Contact\n2. Edit Contact\n3. Delete Contact\n4. Display Contacts\n5. Sort Contacts by Name\n6. Sort Contacts by Location (City/State/Zip)\n7. Write to File\n8. Read from File\n9. Go Back to Main Menu");
             System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
             scanner.nextLine(); 
@@ -179,6 +179,12 @@ public class AddressBookMain {
                     else System.out.println("Invalid choice.");
                     break;
                 case 7:
+                    new AddressBookFileIOService().writeData(addressBook.getContacts());
+                    break;
+                case 8:
+                    new AddressBookFileIOService().readData();
+                    break;
+                case 9:
                     running = false;
                     break;
                 default:
