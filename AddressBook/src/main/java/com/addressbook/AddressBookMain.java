@@ -1,4 +1,4 @@
-package com.userregistration;
+package com.addressbook;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

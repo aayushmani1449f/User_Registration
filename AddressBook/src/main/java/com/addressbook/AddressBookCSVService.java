@@ -1,4 +1,4 @@
-package com.userregistration;
+package com.addressbook;
 
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
