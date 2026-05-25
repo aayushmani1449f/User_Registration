@@ -51,4 +51,56 @@ public class AddressBookDBService implements IAddressBookDataService {
         }
         return contactList;
     }
+    public int updateContactPhone(String firstName, String lastName, String newPhone) {
+        String query = "UPDATE contacts SET phone_number = ? WHERE first_name = ? AND last_name = ?";
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, newPhone);
+            preparedStatement.setString(2, firstName);
+            preparedStatement.setString(3, lastName);
+            return preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public boolean isContactInSync(String firstName, String lastName, List<Contact> memoryContacts) {
+        List<Contact> dbContacts = getContactFromDB(firstName, lastName);
+        if (dbContacts.isEmpty()) return false;
+        Contact dbContact = dbContacts.get(0);
+        Contact memoryContact = memoryContacts.stream()
+                .filter(c -> c.getFirstName().equals(firstName) && c.getLastName().equals(lastName))
+                .findFirst().orElse(null);
+        if (memoryContact == null) return false;
+        
+        return dbContact.getPhoneNumber().equals(memoryContact.getPhoneNumber());
+    }
+
+    public List<Contact> getContactFromDB(String firstName, String lastName) {
+        List<Contact> contactList = new ArrayList<>();
+        String query = "SELECT * FROM contacts WHERE first_name = ? AND last_name = ?";
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, firstName);
+            preparedStatement.setString(2, lastName);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Contact contact = new Contact(
+                        resultSet.getString("first_name"),
+                        resultSet.getString("last_name"),
+                        resultSet.getString("address"),
+                        resultSet.getString("city"),
+                        resultSet.getString("state"),
+                        resultSet.getString("zip"),
+                        resultSet.getString("phone_number"),
+                        resultSet.getString("email")
+                );
+                contactList.add(contact);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return contactList;
+    }
 }
