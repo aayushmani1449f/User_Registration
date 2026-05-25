@@ -12,7 +12,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
-public class AddressBookJSONService {
+public class AddressBookJSONService implements IAddressBookDataService {
 
     public static final String ADDRESS_BOOK_JSON_FILE = "addressbook-file.json";
 

@@ -16,7 +16,7 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.ArrayList;
 
-public class AddressBookCSVService {
+public class AddressBookCSVService implements IAddressBookDataService {
 
     public static final String ADDRESS_BOOK_CSV_FILE = "addressbook-file.csv";
 
